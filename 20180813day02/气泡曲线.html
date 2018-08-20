@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">-->
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background: grey;
+    }
+    #myCanvas{
+      background: #ffffff;
+      position: absolute;
+      left:0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="150px" height="400px"></canvas>
+</body>
+<script>
+  window.onload=function () {
+    var canvas=document.getElementById('myCanvas')
+    var circleArr=[]
+    if(canvas.getContext){
+      var ctx=canvas.getContext('2d')
+      setInterval(function () {
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+        for(var i=0;i<circleArr.length;i++){
+          circleArr[i].deg+=5
+          var rad=circleArr[i].deg*Math.PI/180
+          var nowLeft=Math.floor(circleArr[i].x+Math.sin(rad)*circleArr[i].s)
+          var nowTop=Math.floor(circleArr[i].y-rad*circleArr[i].s)
+          if(nowTop<=0){
+            circleArr.splice(i,1);
+            continue;
+          }
+          ctx.fillStyle='rgba('+circleArr[i].r+','+circleArr[i].g+','+circleArr[i].b+',1)'
+          ctx.beginPath()
+          ctx.arc(nowLeft, nowTop, circleArr[i].c_r, 0, Math.PI * 2);
+
+          ctx.fill()
+        }
+      },1000/60)
+      setInterval(function () {
+        var r=Math.floor(Math.random()*255)
+        var g=Math.floor(Math.random()*255)
+        var b=Math.floor(Math.random()*255)
+        var c_r=Math.floor(Math.random()*8+2)
+        var x=Math.floor(Math.random()*canvas.width)
+        var y=canvas.height+c_r
+        var s=Math.floor(Math.random()*50+10)
+        circleArr.push({
+          r:r,
+          g:g,
+          b:b,
+          x:x,
+          y:y,
+          c_r:c_r,
+          deg:0,
+          s:s
+
+        })
+
+      },50)
+    }
+  }
+
+</script>
+</html>

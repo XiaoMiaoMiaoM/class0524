@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="css/index000.css">
+</head>
+<body>
+<div id="wrap">
+  <header id="header">
+    <section class="headerMain">
+      <h1 class="logo">
+        <a href="javascript:">
+          <img src="img/logo.png" alt="">
+        </a>
+      </h1>
+      <ul class="list">
+        <li>
+          <a href="javascript:">
+            <div class="up">
+              <img src="img/home_gruen.png" alt="">
+            </div>
+            <div class="down">
+              <img src="img/home.png" alt="">
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:">
+            <div class="up">Course</div>
+            <div class="down">Course</div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:">
+            <div class="up">Works</div>
+            <div class="down">Works</div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:">
+            <div class="up">About</div>
+            <div class="down">About</div>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:">
+            <div class="up">Team</div>
+            <div class="down">Team</div>
+          </a>
+        </li>
+      </ul>
+      <div class="arrow"></div>
+    </section>
+  </header>
+</div>
+
+<script>
+  window.onload=function () {
+    var liNodes = document.querySelectorAll('#header .headerMain .list li')
+    var upNodes = document.querySelectorAll('#header .headerMain .list li .up')
+    var arrNode = document.querySelector('#header .headerMain .arrow')
+    var nowIndex = 0
+    var wheelTimer = null
+
+    headerHandle()
+
+    function headerHandle() {
+      arrNode.style.left = liNodes[0].getBoundingClientRect().left + liNodes[0].offsetWidth / 2 - arrNode.offsetWidth / 2 + 'px'
+      //黑色为up
+      upNodes[0].style.width = '100%'
+      for(var i=0;i<liNodes.length;i++){
+        liNodes[i].index=i
+       liNodes[i].onclick=function () {
+         nowIndex=this.index
+         move(nowIndex)
+       }
+      }
+    }
+    function move(nowIndex) {
+      for(var j=0;j<upNodes.length;j++){
+        upNodes[j].style.width=''
+      }
+      arrNode.style.left=liNodes[nowIndex].getBoundingClientRect().left+liNodes[nowIndex].offsetWidth/2-arrNode.offsetWidth/2+'px'
+      upNodes[nowIndex].style.width='100%'
+    }
+
+
+  }
+</script>
+</body>
+</html>

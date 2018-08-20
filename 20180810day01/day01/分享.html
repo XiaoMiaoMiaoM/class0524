@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+<script type = text/javascript>
+  /*
+
+  this(上下文对象)，this是在浏览器的解码器执行函数的时候，
+                     每次都会将一个隐含的参数传递进函数里
+                      这个隐含的参数就是this，
+  */
+
+
+  //根据函数的调用方式不同，this的值也就不同；
+  // //1.以函数形式调用，this就是window
+  // var name = '全局的name'
+  // function fn () {
+  //   console.log(this)
+  // }
+  // fn()
+
+
+  //2.以方法的形式调用，this调用该方法的对象，当一个对象的属性是一个函数是，
+                       //就说这个函数是该对象的方法
+// var obj = {
+//   name:'周文斌',
+//   age:18,
+//   fn:function () {
+//     console.log(this);
+//     function fn2() {
+//       console.log(this);
+//     }
+//     fn2()
+//   }
+// }
+// obj.fn()
+
+  var foo = obj.fn
+  foo();
+
+
+  //3.以构造函数的形式调用，this指向的就是新建的对象
+  //①对象字面量
+  // var obj = {}
+  // //②构造函数创建对象；
+  // var obj2 = new Object()
+  // //③工厂模式创建对象
+  // function fn(name,age) {
+  //   var obj = {}
+  //   obj.name = name;
+  //   obj.age = age;
+  //   return obj
+  // }
+  // var obj3 = fn('周文斌',18)
+  // console.log(obj3);
+  //④自定义构造函数创建对象
+//   function Fn(name,age) {
+//     this.age = age;
+//     this.name = name
+//     console.log(this);
+//   }
+// var obj = new Fn('ZWB',18)
+//   console.log(obj);
+//   //new操作符
+
+
+  //4.call()  传递参数的时候，得用字符串的形式来
+  // apply() 传递参数的时候，得用数组的形式来        在强制绑定完this以后，会立即调用该函数
+  //bind()   在绑定完this以后，会将该函数返回，不会立即调用，需要手动调用
+  var obj = {
+    name:'zwb',
+    age:18
+  }
+
+  function fn(a) {
+    console.log(this,a);
+  }
+  // fn()
+  // // fn.call(obj,'a')
+  // fn.apply(obj,['a'])
+
+fn.bind(obj,'a')()
+
+
+
+
+</script>
+
+</body>
+</html>

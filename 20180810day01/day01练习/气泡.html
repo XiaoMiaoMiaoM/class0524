@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">-->
+  <title>Title</title>
+  <style>
+    #test{
+      position: absolute;
+      left:200px;
+      top: 200px;
+      width: 10px;
+      height: 10px;
+      background: deeppink;
+    }
+    .box{
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: #000000;
+    }
+  </style>
+</head>
+<body>
+<div id="test"></div>
+</body>
+<script>
+  var test=document.getElementById('test')
+  //获取当前元素
+
+  var testLeft=test.offsetLeft
+  var testTop=test.offsetTop
+  var deg=0
+  var speed=100
+  setInterval(function () {
+    deg++
+    var red=deg*Math.PI/180
+    var nowLeft=testLeft+0.5*red*speed+'px'
+    var nowTop=testTop+2*Math.sin(red)*speed+'px'
+    //修改他们的值
+    test.style.left=nowLeft
+    test.style.top=nowTop
+
+    var box=document.createElement('div')
+    box.className='box'
+    box.style.left=nowLeft
+    box.style.top=nowTop
+    document.body.appendChild(box)
+
+  },20)
+</script>
+</html>

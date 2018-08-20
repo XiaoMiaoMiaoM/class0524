@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">-->
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background: grey;
+    }
+    #myCanvas{
+      position: absolute;
+      left:0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400"></canvas>
+</body>
+<script>
+  window.onload=function () {
+  var canvas=document.getElementById('myCanvas')
+   var circleArr=[]
+    if(canvas.getContext){
+    var ctx=canvas.getContext('2d')
+      setInterval(function () {
+        for(var i=0;i<circleArr.length;i++){
+          ctx.fillStyle='rgba('+circleArr[i].r+','+circleArr[i].g+','+circleArr[i].b+',1)'
+          ctx.beginPath()
+          ctx.arc(circleArr[i].x,circleArr[i].y,10,0,Math.PI*2)
+          ctx.fill()
+        }
+
+      },500)
+      
+      setInterval(function () {
+        //颜色随机
+        var r=Math.floor(Math.random()*255)
+        var g=Math.floor(Math.random()*255)
+        var b=Math.floor(Math.random()*255)
+        //位置随机
+        var x=Math.floor(Math.random()*canvas.width)
+        var y=Math.floor(Math.random()*canvas.height)
+
+        circleArr.push({
+          r:r,
+          g:g,
+          b:b,
+          x:x,
+          y:y
+
+        })
+
+      },500)
+
+
+    }
+  }
+</script>
+</html>
